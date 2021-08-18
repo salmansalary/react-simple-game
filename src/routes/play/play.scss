@@ -1,0 +1,32 @@
+.playContainer {
+    background-image: url(../../assets/images/backImg.png);
+    background-repeat:no-repeat;
+    background-size:cover;
+    background-position: bottom;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100vw;
+    height: 100vh;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 85px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.score {
+    padding: 30px 0 0 30px;
+    color: white;
+    font-weight: bold;
+    z-index: 3;
+    font-size: 30px;
+    text-shadow: 0 2px 1px rgba(0, 0, 0, 0.7);
+}
+

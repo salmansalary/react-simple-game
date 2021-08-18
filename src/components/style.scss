@@ -1,0 +1,128 @@
+.box {
+    width: 30%;
+    position: relative;
+    outline-style:none;
+    -webkit-tap-highlight-color:transparent;
+    &:hover{
+        cursor: pointer;
+    }
+}
+
+.box:after {
+    content: "";
+    display: block;
+    padding-bottom: 100%;
+}
+
+.charContainer {
+    position: absolute;
+    height: 90%;
+    width: 100%;
+    bottom: 10%;
+    border-radius: 50%;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    overflow-y: hidden;
+    z-index: 3;
+}
+
+.character {
+    position: absolute;
+    left: 10%;
+    bottom: 0%;
+    -moz-transition: height .5s;
+    -ms-transition: height .5s;
+    -o-transition: height .5s;
+    -webkit-transition: height .5s;
+    transition: height .5s;
+    height: 0px;
+    width: 80%;
+    z-index: 4;
+    background-repeat:no-repeat;
+    background-size: cover;
+    background-position: top; 
+}
+
+.char0 {
+    background-image: url(../assets/images/1.png);
+    height: 100%;
+}
+.char1{
+    background-image: url(../assets/images/2.png);
+    height: 100%;
+}
+.char2 {
+    background-image: url(../assets/images/3.png);
+    height: 100%;
+}
+.char3 {
+    background-image: url(../assets/images/4.png);
+    height: 100%;
+}
+.char4 {
+    background-image: url(../assets/images/5.png);
+    height: 100%;
+}
+.char5 {
+    background-image: url(../assets/images/6.png);
+    height: 100%;
+}
+.char6 {
+    background-image: url(../assets/images/7.png);
+    height: 100%;
+}
+.char7 {
+    background-image: url(../assets/images/8.png);
+    height: 100%;
+}
+
+.nochar {
+    height: 0px;
+}
+
+.hole {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 50%;
+    width: 100%;
+    background-image: url(../assets/images/hole.png);
+    background-repeat:no-repeat;
+    background-size: contain;
+    background-position: center;    
+}
+
+.timer {
+    padding: 30px 10px 0 0;
+    color: white;
+    font-weight: bold;
+    z-index: 3;
+    font-size: 30px;
+    text-shadow: 0 2px 1px rgba(0, 0, 0, 0.7);
+}
+
+.playGround{
+    position: relative;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-between;
+    align-content: center;
+    width: 90%;
+    max-width: 600px;
+}
+
+.playGround:after {
+    content: "";
+    display: block;
+}
+
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 30%;
+    margin: auto;
+}

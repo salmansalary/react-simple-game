@@ -1,0 +1,69 @@
+{
+  "name": "game",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "@types/jest": "^26.0.24",
+    "@types/node": "^16.3.2",
+    "@types/react": "^17.0.14",
+    "@types/react-dom": "^17.0.9",
+    "@types/react-router-dom": "^5.1.8",
+    "classnames": "^2.3.1",
+    "css-loader": "^6.0.0",
+    "lodash": "^4.17.21",
+    "node-sass": "^6.0.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "4.0.3",
+    "sass-loader": "^12.1.0",
+    "style-loader": "^3.1.0",
+    "typescript": "^4.3.5",
+    "typescript-plugin-css-modules": "^3.4.0",
+    "web-vitals": "^1.0.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "clean": "rm -rf /build",
+    "copy": "cp ./src/assets/images/gameScreen1.png ./build/static/media && cp ./src/assets/images/gameScreen2.png ./build/static/media ",
+    "build": "npm run clean && react-scripts build && npm run copy",
+    "test": "react-scripts test",
+    "test:update": "react-scripts test --updateSnapshot",
+    "test:coverage": "npm run test -- --coverage --watchAll=false",
+    "eject": "react-scripts eject"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+        "src/components/**/*.tsx",
+        "src/routes/**/*.tsx",
+        "src/App.tsx",
+        "!src/index.tsx"
+    ]
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@wojtekmaj/enzyme-adapter-react-17": "^0.6.3",
+    "enzyme": "^3.11.0",
+    "enzyme-to-json": "^3.6.2"
+  }
+}

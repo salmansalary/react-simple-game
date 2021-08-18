@@ -1,0 +1,238 @@
+.homeContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100vw;
+    height: 100vh;
+    background: #00C9FF;  /* fallback for old browsers */
+    background-image: url(../../assets/images/backImgMain.png);
+    background-repeat:no-repeat;
+    background-size:cover;
+    background-position: bottom;
+    padding-top: 12px;
+    overflow-y: scroll;
+}
+
+.titleWrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: calc(100% - 18px);
+    max-width: 350px;
+}
+
+.fox {
+    background-image: url(../../assets/images/8.png);
+    height: 70px;
+    width: 70px;
+    display: inline-block;
+    background-repeat:no-repeat;
+    background-size: cover;
+    background-position: top; 
+}
+
+.titleMessage {
+    width: 100%;
+    text-align: center;
+    font-size: 30pt;
+    font-family: 'Dosis-ExtraBold';
+    color: white;
+    text-shadow: 6px 6px 0px rgba(250, 192, 2, 0.8);
+}
+
+.scoreBoardContainer {
+    margin-top: 50px;
+    background-color: #3e3e3e;
+    border-radius: 8px;
+    border: 2px solid orange;
+    margin-left: auto;
+    margin-right: auto;
+    width: calc(100% - 18px);
+    max-width: 350px;
+    box-shadow:  6px 6px 0px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    min-height: 95px;
+    overflow-y: auto;
+}
+
+.scoreRecord {
+    display: flex;
+    flex-direction: row;
+    max-width: 332px;
+    height: 30px;
+    min-height: 30px;
+    padding: 0px 10px;
+    border-bottom: 1px dashed lightgray;
+    &:last-child{
+        border: none;
+    }
+}
+
+.scoreColumnTitle {
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 30px;
+    font-family: 'Dosis-ExtraBold';
+    font-size: 12pt;
+    color: greenyellow;
+    text-transform: uppercase;
+}
+
+.rankDiv{
+    width: 10%;
+    min-width: 50px;
+    height: 100%;
+    display: flex;
+    border-right: 1px dashed lightgray;
+}
+
+.rankLabel{
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 30px;
+    font-family: 'Dosis-ExtraBold';
+    font-size: 12pt;
+    color: #cecece;
+}
+
+.nameDiv {
+    height: 100%;
+    display: flex;
+    width: 60%;
+    border-right: 1px dashed lightgray;
+}
+
+.nameLabel {
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 30px;
+    font-family: 'Dosis-ExtraBold';
+    font-size: 12pt;
+    color: cyan;
+    text-transform: uppercase;
+}
+
+.scoreDiv {
+    height: 100%;
+    display: flex;
+    width: 40%;
+}
+
+.scoreLabel {
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 30px;
+    font-family: 'Dosis-ExtraBold';
+    font-size: 12pt;
+    color: orange;
+    text-transform: uppercase;
+}
+
+.nameInput {
+    width: calc(100% - 18px);
+    max-width: 350px;
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 12pt;
+    font-family: 'Dosis-Bold';
+    border: none;
+    padding-left: 10px;
+    height: 30px;
+    min-height: 30px;
+    border-radius: 4px;
+    box-shadow:  6px 6px 0px rgba(0,0,0,0.2);
+    text-transform: uppercase;
+    &:focus{
+        outline: none;
+        outline-offset: none;
+    }
+}
+
+.btnStart{
+    height: 50px;
+    min-height: 50px;
+    width: calc(100% - 18px);
+    max-width: 350px;
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: orange;
+    font-family: 'Dosis-ExtraBold';
+    text-transform: uppercase;
+    font-size: 20pt;
+    border-radius: 4px;
+    border: 1px solid white;
+    color: white;
+    box-shadow:  6px 6px 0px rgba(0,0,0,0.2);
+    overflow: hidden;
+    text-overflow:clip;
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.warning {
+    border: 1px solid red;
+}
+  
+.shake {
+    animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+
+.shake-alt {
+    animation: shake-alt 0.82s cubic-bezier(.36,.07,.19,.97) both;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+
+@keyframes shake {
+    10%, 90% {
+      transform: translate3d(-1px, 0, 0);
+    }
+    
+    20%, 80% {
+      transform: translate3d(2px, 0, 0);
+    }
+  
+    30%, 50%, 70% {
+      transform: translate3d(-4px, 0, 0);
+    }
+  
+    40%, 60% {
+      transform: translate3d(4px, 0, 0);
+    }
+}
+
+@keyframes shake-alt {
+    10%, 90% {
+      transform: translate3d(-1px, 0, 0);
+    }
+    
+    20%, 80% {
+      transform: translate3d(2px, 0, 0);
+    }
+  
+    30%, 50%, 70% {
+      transform: translate3d(-4px, 0, 0);
+    }
+  
+    40%, 60% {
+      transform: translate3d(4px, 0, 0);
+    }
+}
