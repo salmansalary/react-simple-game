@@ -23,7 +23,7 @@ const Character = ({onItemClick, active, inActivate, forceStop }: CharProps)=>{
         if(active && !forceStop) {
 
             //The probebility of Fox Non-Fox 50% - 50%
-            const nomination = randomInt(0,1) === 1  ? 7  :  randomInt(0,6);
+            const nomination = Math.random() >= 0.5  ? 7  :  randomInt(0,6);
             
             setChar({
                 className: `char${nomination}`,
