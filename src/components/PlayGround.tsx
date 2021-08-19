@@ -41,7 +41,7 @@ const PlayGround = ({onItemClick, forceStop, initialState =  initial}:Props) => 
         const gClock = setInterval(() => setActive(randomInt(0,8), true), 500) as any;
         return () => clearInterval(gClock)
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [forceStop,...activeState]);
+    }, []);
 
 
     const getCharProps = (id:number) => {
