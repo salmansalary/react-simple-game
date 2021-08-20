@@ -5,71 +5,67 @@ import { randomInt } from '../utils';
 
 type CharProps = {
     onItemClick:Function,
-    active: boolean,
-    inActivate: Function,
-    forceStop: boolean
+    forceStop: boolean,
+    id: number,
+    charStates: any
 }
 
 const charPoints = [-1,-2,-3,-1,-2,-3,-1,5];
 
-const Character = ({onItemClick, active, inActivate, forceStop }: CharProps)=>{
+const Character = ({onItemClick, id, charStates , forceStop }: CharProps)=>{
 
     const [ char, setChar ] = useState({ className : '', point: 0 });
 
     useEffect(() => {
 
-        let hideTimer, poofTimer;
+        if(forceStop) return
 
-        if(active && !forceStop) {
+        let poofTimer, lock;
 
-            //The probebility of Fox Non-Fox 50% - 50%
-            const nomination = Math.random() >= 0.5  ? 7  :  randomInt(0,6);
+        const checkingTime = randomInt(4,7) * 100;
+
+        const gClock = setInterval(() => {
             
-            setChar({
-                className: `char${nomination}`,
-                point: charPoints[nomination]
-            })
+            if(charStates[id] && !lock){
 
-            //Start going back to the hole after 1 sec show
-            hideTimer = setTimeout(function(){
+                lock = true;
+                //The probebility of Fox Non-Fox 50% - 50%
+                const nomination = Math.random() >= 0.5  ? 7  :  randomInt(0,6);
+                
                 setChar({
-                    className: `char${nomination} nochar`,
+                    className: `char${nomination}`,
                     point: charPoints[nomination]
                 })
-                clearTimeout(hideTimer);
-            },1000)
 
-            //remove the active state for this hole after 2 second for next random nomination
-            poofTimer = setTimeout(function(){
-                if(active && !forceStop) inActivate();
-                clearTimeout(poofTimer);
-            },2000)
+                //remove the active state for this hole after 2 second for next random nomination
+                poofTimer = setTimeout(function(){
+                    charStates[id] = false;
+                    setChar({ className: '', point: 0 });
+                    lock = false;
+                    clearTimeout(poofTimer);
+                },1500)
 
-        } else if(!forceStop) {
-            //set char class empty incase of user clicking or 2 second removal
-            setChar({
-                className: ``,
-                point: 0
-            })
-        }
+            }
+        }, checkingTime) as any;
 
         return () => {
-            clearTimeout(hideTimer);
+            clearInterval(gClock)
             clearTimeout(poofTimer);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [active, forceStop])
+    }, [forceStop]);
 
     return <div className='box'>
             <div className="charContainer">
                 <div 
                     className={classNames('character', {[char.className]: true})} 
-                    onClick={(ev)=>{
+                    onClick={(ev) => {
 
                         ev.stopPropagation();
                         onItemClick(char?.point);
-                        if(active && !forceStop) inActivate();
-
+                        
+                        if(charStates[id] && !forceStop) setChar({ className: '', point: 0 })             
+                        
                     }}
                 />
             </div>
@@ -77,6 +73,6 @@ const Character = ({onItemClick, active, inActivate, forceStop }: CharProps)=>{
         </div>
 }
 
-const propsAreSameIf = (pre:CharProps,cur:CharProps) => pre.active === cur.active && pre.forceStop === cur.forceStop
+const propsAreSameIf = (pre:CharProps,cur:CharProps) => pre.forceStop === cur.forceStop
 
 export default React.memo(Character,propsAreSameIf);

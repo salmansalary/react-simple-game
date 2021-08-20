@@ -30,11 +30,11 @@
     position: absolute;
     left: 10%;
     bottom: 0%;
-    -moz-transition: height .5s;
-    -ms-transition: height .5s;
-    -o-transition: height .5s;
-    -webkit-transition: height .5s;
-    transition: height .5s;
+    // transition: height .5s;
+    // -ms-transition: height .5s;
+    // -o-transition: height .5s;
+    // -webkit-transition: height .5s;
+    // transition: height .5s;
     height: 0px;
     width: 80%;
     z-index: 4;
@@ -43,37 +43,68 @@
     background-position: top; 
 }
 
+@keyframes slideUp{
+    0% {
+        height: 0px;
+    }
+    20% {
+        height: 100%;
+    }
+    80% {
+        height: 100%;
+    }
+    100% {
+        height: 0px;
+    }
+}
+
 .char0 {
     background-image: url(../assets/images/1.png);
-    height: 100%;
+    animation-name: slideUp;
+    animation-timing-function: ease;
+    animation-duration: 1.5s;
 }
 .char1{
     background-image: url(../assets/images/2.png);
-    height: 100%;
+    animation-name: slideUp;
+    animation-timing-function: ease;
+    animation-duration: 1.5s;
 }
 .char2 {
     background-image: url(../assets/images/3.png);
-    height: 100%;
+    animation-name: slideUp;
+    animation-timing-function: ease;
+    animation-duration: 1.5s;
 }
 .char3 {
     background-image: url(../assets/images/4.png);
-    height: 100%;
+    animation-name: slideUp;
+    animation-timing-function: ease;
+    animation-duration: 1.5s;
 }
 .char4 {
     background-image: url(../assets/images/5.png);
-    height: 100%;
+    animation-name: slideUp;
+    animation-timing-function: ease;
+    animation-duration: 1.5s;
 }
 .char5 {
     background-image: url(../assets/images/6.png);
-    height: 100%;
+    animation-name: slideUp;
+    animation-timing-function: ease;
+    animation-duration: 1.5s;
 }
 .char6 {
     background-image: url(../assets/images/7.png);
-    height: 100%;
+    animation-name: slideUp;
+    animation-timing-function: ease;
+    animation-duration: 1.5s;
 }
 .char7 {
     background-image: url(../assets/images/8.png);
-    height: 100%;
+    animation-name: slideUp;
+    animation-timing-function: ease;
+    animation-duration: 1.5s;
 }
 
 .nochar {

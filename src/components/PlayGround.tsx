@@ -1,44 +1,28 @@
-import React, { useState,useEffect } from 'react';
+import React, {useEffect } from 'react';
 import Character from './Character';
 import './style.scss'
 import { randomInt } from '../utils';
-
-const initial =  [false,false,false,false,false,false,false,false,false];
 
 type Props = {
     onItemClick:Function,
     forceStop: boolean,
     initialState?: boolean[]// for testing
+    charStates: any;
 
 }
 
 type CharProps = {
+    id: number;
     onItemClick:Function,
-    active: boolean,
-    inActivate: Function,
-    forceStop: boolean
+    forceStop: boolean,
+    charStates: any;
 }
 
-const PlayGround = ({onItemClick, forceStop, initialState =  initial}:Props) => {
-
-    const [activeState, setActiveState] = useState(initialState);
-
-    const setActive = (id,value) => setActiveState(pre=>{ 
-
-        if(forceStop){
-            return [...initialState];
-        }
-        if(value === pre[id]) { return pre; }
-        const temp = [...pre];
-        temp[id] = value;
-
-        return temp;
-
-    })
+const PlayGround = ({onItemClick, forceStop, charStates}:Props) => {
 
     useEffect(() => {
 
-        const gClock = setInterval(() => setActive(randomInt(0,8), true), 500) as any;
+        const gClock = setInterval(() => charStates[randomInt(0,8)] = true, 500) as any;
         return () => clearInterval(gClock)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
@@ -49,8 +33,8 @@ const PlayGround = ({onItemClick, forceStop, initialState =  initial}:Props) => 
         return {
             forceStop,
             onItemClick,
-            active: activeState[id],
-            inActivate: ()=>setActive(id,false)
+            charStates,
+            id
         } as CharProps;
 
     }
