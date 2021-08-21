@@ -23,12 +23,14 @@ describe('Play', () => {
         await act(async function() {
             component = mount(<Play initialGameTime={5} charStates = {{0:true}}/>);
     
-            //Clicking on all the Characters to capture at lease one of the active Characters
-            await new Promise(resolve => setTimeout(()=>resolve(true),800))
+            // Clicking on all the Characters to capture at lease one of the active Characters
+            await new Promise(resolve => setTimeout(()=>resolve(true),300))
 
-            component.find('div.character').map(char=>{
-                char.simulate('click');
+            component.find('div.character').map((char,index)=>{
+                index == 0 ? char.simulate('click') : {}
+                return char
             })
+            
         })
         
         expect(component.find('label.score').text()).not.toBe('0')
