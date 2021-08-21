@@ -65,7 +65,7 @@ const PlayGround = ({onItemClick, forceStop,charStates}:Props) => {
 
     useEffect(() => {
 
-        const gClock = setInterval(() => setCharState(randomInt(0,8),true), 500) as any;
+        const gClock = setInterval(() => setCharState(randomInt(0,8),true), 400) as any;
         return () => clearInterval(gClock)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);

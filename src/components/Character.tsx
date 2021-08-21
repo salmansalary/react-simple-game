@@ -8,39 +8,32 @@ type CharProps = {
     forceStop: boolean,
     isActive?: boolean,
     inActivate: Function
+    charPoints?: any;
 }
 
-const charPoints = [-1,-2,-3,-1,-2,-3,-1,5];
+const Character = ({onItemClick, isActive, inActivate, forceStop, charPoints }: CharProps)=>{
 
-const Character = ({onItemClick, isActive, inActivate, forceStop }: CharProps)=>{
-
-    const [ char, setChar ] = useState({ className : '', point: 0 });
+    const [ charClass, setCharClass ] = useState('');
 
     useEffect(() => {
 
         if(forceStop) return
 
-        let poofTimer, lock;
+        let poofTimer;
 
-        if(isActive && !lock){
+        if(isActive){
 
-            lock = true;
             //The probebility of Fox Non-Fox 50% - 50%
             const nomination = Math.random() >= 0.5  ? 7  :  randomInt(0,6);
             
-            setChar({
-                className: `char${nomination}`,
-                point: charPoints[nomination]
-            })
+            setCharClass(`char${nomination}`)
 
-            //remove the active state for this hole after 2 second for next random nomination
             poofTimer = setTimeout(function(){
                 if(isActive) inActivate();
-                lock = false;
                 clearTimeout(poofTimer);
-            },1100)
+            },1000)
 
-        } else setChar({ className: '', point: 0 })
+        } else setCharClass('')
 
 
         return () => clearTimeout(poofTimer);
@@ -50,13 +43,12 @@ const Character = ({onItemClick, isActive, inActivate, forceStop }: CharProps)=>
     return <div className='box'>
             <div className="charContainer">
                 <div 
-                    className={classNames('character', {[char.className]: true})} 
+                    className={classNames('character', {[charClass]: true})} 
                     onClick={(ev) => {
 
                         ev.stopPropagation();
-                        onItemClick(char?.point);
-                        
-                        if(isActive) inActivate()             
+                        onItemClick(charPoints[charClass]);
+                        inActivate()
                         
                     }}
                 />
@@ -67,4 +59,21 @@ const Character = ({onItemClick, isActive, inActivate, forceStop }: CharProps)=>
 
 const propsAreSameIf = (pre:CharProps,cur:CharProps) => pre.forceStop === cur.forceStop && pre.isActive === cur.isActive
 
-export default React.memo(Character,propsAreSameIf);
+const CharacterContainer = React.memo((props: CharProps) => {
+
+    const charPoints = {
+        char0: -1,
+        char1: -2,
+        char2: -3,
+        char3: -1,
+        char4: -2,
+        char5: -3,
+        char6: -1,
+        char7: 5,
+    }
+
+    return <Character {...props} charPoints={charPoints}/>
+
+},propsAreSameIf)
+
+export default CharacterContainer
