@@ -11,7 +11,7 @@ describe('Play', () => {
     window.HTMLMediaElement.prototype.pause = () => { /* do nothing */ };
 
     it('should render App correctly', () => {
-        const component = shallow(<Play initialGameTime={4} charStates = {{0:true}}/>);
+        const component = shallow(<Play initialGameTime={4} charStates = {{0:'char7'}}/>);
     
         expect(component).toMatchSnapshot();
     });
@@ -21,7 +21,7 @@ describe('Play', () => {
         let component;
 
         await act(async function() {
-            component = mount(<Play initialGameTime={5} charStates = {{0:true}}/>);
+            component = mount(<Play initialGameTime={5} charStates = {{0:'char7'}}/>);
     
             // Clicking on all the Characters to capture at lease one of the active Characters
             await new Promise(resolve => setTimeout(()=>resolve(true),300))

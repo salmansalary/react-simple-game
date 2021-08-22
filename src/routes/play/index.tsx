@@ -9,15 +9,17 @@ import { GameAudio, IAudioClassType } from '../../utils/index';
 type PlayProps = {
     initialGameTime: number,
     audioObject: IAudioClassType,
-    charStates: any;
+    charStates: any,
+    charPoints: any
 }
 
 type PlayWrapperProps = {
     initialGameTime: number,
-    charStates: any;
+    charStates?: any,
+    charPoints?: any
 }
 
-function Play({initialGameTime = 30, audioObject, charStates }:PlayProps){
+function Play({initialGameTime = 30, audioObject, ...props }:PlayProps){
 
     const history = useHistory();
     const { dispatch } = useStore();
@@ -59,27 +61,37 @@ function Play({initialGameTime = 30, audioObject, charStates }:PlayProps){
             <label className="score">{score}</label>
             <Timer onStop={onStop} initialGameTime={initialGameTime}/>
         </div>
-        <PlayGround onItemClick={onItemClick} forceStop = {stop} charStates={charStates}/>
+        <PlayGround onItemClick={onItemClick} forceStop = {stop} {...props}/>
     </div>
 }
 
 
-function PlayWrapper({charStates ={
-    0: false,
-    1: false,
-    2: false,
-    3: false,
-    4: false,
-    5: false,
-    6: false,
-    7: false,
-    8: false
-} ,...props} :PlayWrapperProps) {
+export default function PlayWrapper(props :PlayWrapperProps) {
+
     const audioObject = new GameAudio() as IAudioClassType;
+    const charStates = {
+        0: '',
+        1: '',
+        2: '',
+        3: '',
+        4: '',
+        5: '',
+        6: '',
+        7: '',
+        8: ''
+    }
+    
+    const charPoints = {
+        char0: -1,
+        char1: -2,
+        char2: -3,
+        char3: -1,
+        char4: -2,
+        char5: -3,
+        char6: -1,
+        char7: 5,
+    }
 
-    return  <Play {...props} audioObject={audioObject} charStates={charStates}/>
+    return  <Play charStates={charStates} charPoints={charPoints} {...props} audioObject={audioObject} />
+
 }
-
-const MemoizedPlay = React.memo(PlayWrapper);
-
-export default MemoizedPlay
