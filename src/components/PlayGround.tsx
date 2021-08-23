@@ -1,7 +1,7 @@
-import React, {useEffect, useState, useCallback } from 'react';
+import React, {useEffect, useState, useCallback, useMemo } from 'react';
 import Character from './Character';
 import './style.scss'
-import { randomInt } from '../utils';
+import { randomInt, GameAudio } from '../utils';
 
 type Props = {
     onItemClick:Function,
@@ -16,6 +16,7 @@ const PlayGround = ({onItemClick: clickFunction , forceStop, charStates, charPoi
 
     const [ activeClasses, setActive ] = useState(charStates);
 
+    const  audioObject = useMemo(() => new GameAudio(),[]);
     const setCharState = useCallback((id,active) => setActive(pre=> { 
 
         if(active && pre[id] === ''){
@@ -45,19 +46,19 @@ const PlayGround = ({onItemClick: clickFunction , forceStop, charStates, charPoi
 
     return <div className="playGround">
         <div className="row">
-            <Character id={0} forceStop={forceStop} onItemClick={onItemClick} activeClass={activeClasses[0]} />
-            <Character id={1} forceStop={forceStop} onItemClick={onItemClick} activeClass={activeClasses[1]} />
-            <Character id={2} forceStop={forceStop} onItemClick={onItemClick} activeClass={activeClasses[2]} />
+            <Character id={0} forceStop={forceStop} onItemClick={onItemClick} activeClass={activeClasses[0]} audioObject={audioObject} />
+            <Character id={1} forceStop={forceStop} onItemClick={onItemClick} activeClass={activeClasses[1]} audioObject={audioObject} />
+            <Character id={2} forceStop={forceStop} onItemClick={onItemClick} activeClass={activeClasses[2]} audioObject={audioObject} />
         </div>
         <div className="row">
-            <Character id={3} forceStop={forceStop} onItemClick={onItemClick} activeClass={activeClasses[3]} />
-            <Character id={4} forceStop={forceStop} onItemClick={onItemClick} activeClass={activeClasses[4]} />
-            <Character id={5} forceStop={forceStop} onItemClick={onItemClick} activeClass={activeClasses[5]} />
+            <Character id={3} forceStop={forceStop} onItemClick={onItemClick} activeClass={activeClasses[3]} audioObject={audioObject} />
+            <Character id={4} forceStop={forceStop} onItemClick={onItemClick} activeClass={activeClasses[4]} audioObject={audioObject} />
+            <Character id={5} forceStop={forceStop} onItemClick={onItemClick} activeClass={activeClasses[5]} audioObject={audioObject} />
         </div>
         <div className="row">
-            <Character id={6} forceStop={forceStop} onItemClick={onItemClick} activeClass={activeClasses[6]} />
-            <Character id={7} forceStop={forceStop} onItemClick={onItemClick} activeClass={activeClasses[7]} />
-            <Character id={8} forceStop={forceStop} onItemClick={onItemClick} activeClass={activeClasses[8]} />
+            <Character id={6} forceStop={forceStop} onItemClick={onItemClick} activeClass={activeClasses[6]} audioObject={audioObject} />
+            <Character id={7} forceStop={forceStop} onItemClick={onItemClick} activeClass={activeClasses[7]} audioObject={audioObject} />
+            <Character id={8} forceStop={forceStop} onItemClick={onItemClick} activeClass={activeClasses[8]} audioObject={audioObject} />
         </div>
     </div>
 }

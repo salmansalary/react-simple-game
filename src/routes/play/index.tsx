@@ -49,8 +49,6 @@ function Play({initialGameTime = 30, audioObject, ...props }:PlayProps){
     }
 
     const onItemClick = useCallback(function(point) {
-
-        audioObject.playPoofAudio();
         setScore(pre=>pre + point);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[]);

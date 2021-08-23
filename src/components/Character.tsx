@@ -6,9 +6,10 @@ type CharProps = {
     onItemClick:Function,
     forceStop: boolean,
     activeClass: string,
+    audioObject: any,
     id: number
 }
-const Character = ({id, onItemClick, activeClass, forceStop }: CharProps)=>{
+const Character = ({id, onItemClick, activeClass, forceStop, audioObject }: CharProps)=>{
 
     useEffect(() => {
 
@@ -36,6 +37,7 @@ const Character = ({id, onItemClick, activeClass, forceStop }: CharProps)=>{
                     onClick={(ev) => {
 
                         ev.stopPropagation();
+                        audioObject.playPoofAudio();
                         onItemClick(id,activeClass);
                         
                     }}
