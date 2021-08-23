@@ -21,16 +21,19 @@ export class GameAudio implements IAudioClassType{
 
         this.finishAudio = new Audio()
         this.finishAudio.src = require('../assets/audio/done.wav').default
+
+        this.playPoofAudio = this.playPoofAudio.bind(this);
+        this.playFinishAudio = this.playFinishAudio.bind(this);
     }
     
 
 
-    playPoofAudio = ()=>{
+    playPoofAudio(){
         this.clickAudio.currentTime = 0;
         this.clickAudio.play();
     };
 
-    playFinishAudio = ()=>{
+    playFinishAudio(){
         this.finishAudio.play();
     };
 
