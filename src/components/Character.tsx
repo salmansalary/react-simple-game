@@ -7,10 +7,12 @@ type CharProps = {
 	onItemClick: Function;
 	forceStop: boolean;
 	audioObject: any;
+	initialClass: string;
+	charPoints: any;
 };
 
-const Character = forwardRef(({ onItemClick, forceStop, audioObject }: CharProps, forwardedRef: any) => {
-	const [charClass, setCalss] = useState({ activeClass: "", key: Math.random(), lastTime: 0 });
+const Character = forwardRef(({ onItemClick, forceStop, audioObject, charPoints, initialClass = "" }: CharProps, forwardedRef: any) => {
+	const [charClass, setCalss] = useState({ activeClass: initialClass, key: Math.random(), lastTime: 0 });
 	useImperativeHandle(forwardedRef, () => ({
 		activate: () => {
 			if (forceStop) return;
@@ -29,10 +31,10 @@ const Character = forwardRef(({ onItemClick, forceStop, audioObject }: CharProps
 					key={charClass.key}
 					className={classNames("character", { [charClass.activeClass]: true })}
 					onClick={(ev) => {
-						ev.stopPropagation();
 						audioObject.playPoofAudio();
+						ev.stopPropagation();
 						setCalss({ activeClass: "", key: Math.random(), lastTime: 0 });
-						onItemClick(charClass.activeClass);
+						onItemClick(charPoints[charClass.activeClass]);
 					}}
 				/>
 			</div>

@@ -12,10 +12,8 @@ type Props = {
 	refs?: any;
 };
 
-const PlayGround = ({ onItemClick: onCLick, forceStop, charPoints, refs }: Props) => {
+const PlayGround = ({ onItemClick, forceStop, charPoints, refs, charStates }: Props) => {
 	const audioObject = useMemo(() => new GameAudio(), []);
-
-	const onItemClick = useCallback((activeClass?) => (activeClass && activeClass !== "" ? onCLick(charPoints[activeClass]) : {}), [charPoints, onCLick]);
 
 	useEffect(() => {
 		if (forceStop) return;
@@ -24,22 +22,36 @@ const PlayGround = ({ onItemClick: onCLick, forceStop, charPoints, refs }: Props
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
+	const charProps = useCallback(
+		(id) =>
+			({
+				charPoints,
+				forceStop,
+				onItemClick,
+				audioObject,
+				ref: refs[id],
+				initialClass: charStates[id],
+			} as any),
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+		[]
+	);
+
 	return (
 		<div className="playGround">
 			<div className="row">
-				<Character ref={refs[0]} forceStop={forceStop} onItemClick={onItemClick} audioObject={audioObject} />
-				<Character ref={refs[1]} forceStop={forceStop} onItemClick={onItemClick} audioObject={audioObject} />
-				<Character ref={refs[2]} forceStop={forceStop} onItemClick={onItemClick} audioObject={audioObject} />
+				<Character {...charProps(0)} />
+				<Character {...charProps(1)} />
+				<Character {...charProps(2)} />
 			</div>
 			<div className="row">
-				<Character ref={refs[3]} forceStop={forceStop} onItemClick={onItemClick} audioObject={audioObject} />
-				<Character ref={refs[4]} forceStop={forceStop} onItemClick={onItemClick} audioObject={audioObject} />
-				<Character ref={refs[5]} forceStop={forceStop} onItemClick={onItemClick} audioObject={audioObject} />
+				<Character {...charProps(3)} />
+				<Character {...charProps(4)} />
+				<Character {...charProps(5)} />
 			</div>
 			<div className="row">
-				<Character ref={refs[6]} forceStop={forceStop} onItemClick={onItemClick} audioObject={audioObject} />
-				<Character ref={refs[7]} forceStop={forceStop} onItemClick={onItemClick} audioObject={audioObject} />
-				<Character ref={refs[8]} forceStop={forceStop} onItemClick={onItemClick} audioObject={audioObject} />
+				<Character {...charProps(6)} />
+				<Character {...charProps(7)} />
+				<Character {...charProps(8)} />
 			</div>
 		</div>
 	);
@@ -47,8 +59,8 @@ const PlayGround = ({ onItemClick: onCLick, forceStop, charPoints, refs }: Props
 
 const propsAreSameIf = (pre: Props, cur: Props) => pre.forceStop === cur.forceStop;
 
-const PlayGroundWrapper = React.memo(({ charStates, ...props }: Props) => {
-	const refs = [useRef(), useRef(), useRef(), useRef(), useRef(), useRef(), useRef(), useRef(), useRef()];
+const PlayGroundWrapper = React.memo((props: Props) => {
+	const refs = [useRef(), useRef(), useRef(), useRef(), useRef(), useRef(), useRef(), useRef(), useRef()] as any;
 
 	return <PlayGround {...props} refs={refs} />;
 }, propsAreSameIf);
