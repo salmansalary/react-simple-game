@@ -1,52 +1,46 @@
-import React, { useEffect } from 'react'
-import './style.scss'
-import classNames from 'classnames';
+import React, { forwardRef, useImperativeHandle, useState } from "react";
+import "./style.scss";
+import classNames from "classnames";
+import { randomInt } from "../utils";
 
 type CharProps = {
-    onItemClick:Function,
-    forceStop: boolean,
-    activeClass: string,
-    audioObject: any,
-    id: number
-}
-const Character = ({id, onItemClick, activeClass, forceStop, audioObject }: CharProps)=>{
+	onItemClick: Function;
+	forceStop: boolean;
+	audioObject: any;
+};
 
-    useEffect(() => {
+const Character = forwardRef(({ onItemClick, forceStop, audioObject }: CharProps, forwardedRef: any) => {
+	const [charClass, setCalss] = useState({ activeClass: "", key: Math.random(), lastTime: 0 });
+	useImperativeHandle(forwardedRef, () => ({
+		activate: () => {
+			if (forceStop) return;
 
-        if(forceStop) return
+			if (charClass.activeClass !== "" && Date.now() - charClass.lastTime <= 1000) return;
 
-        let poofTimer;
+			const nomination = Math.random() >= 0.5 ? 7 : randomInt(0, 6);
+			setCalss({ activeClass: `char${nomination}`, key: Math.random(), lastTime: Date.now() });
+		},
+	}));
 
-        if(activeClass !== ''){
+	return (
+		<div className="box">
+			<div className="charContainer">
+				<div
+					key={charClass.key}
+					className={classNames("character", { [charClass.activeClass]: true })}
+					onClick={(ev) => {
+						ev.stopPropagation();
+						audioObject.playPoofAudio();
+						setCalss({ activeClass: "", key: Math.random(), lastTime: 0 });
+						onItemClick(charClass.activeClass);
+					}}
+				/>
+			</div>
+			<div className="hole" />
+		</div>
+	);
+});
 
-            poofTimer = setTimeout(function(){
-                onItemClick(id);
-                clearTimeout(poofTimer);
-            },1000)
+const propsAreSameIf = (pre: CharProps, cur: CharProps) => pre.forceStop === cur.forceStop;
 
-        }
-
-        return () => clearTimeout(poofTimer);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [forceStop, activeClass]);
-
-    return <div className='box'>
-            <div className="charContainer">
-                <div 
-                    className={classNames('character', {[activeClass]: true})} 
-                    onClick={(ev) => {
-
-                        ev.stopPropagation();
-                        audioObject.playPoofAudio();
-                        onItemClick(id,activeClass);
-                        
-                    }}
-                />
-            </div>
-            <div className="hole"/>
-        </div>
-}
-
-const propsAreSameIf = (pre:CharProps,cur:CharProps) => pre.forceStop === cur.forceStop && pre.activeClass === cur.activeClass
-
-export default React.memo(Character,propsAreSameIf)
+export default React.memo(Character, propsAreSameIf);

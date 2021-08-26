@@ -1,164 +1,163 @@
 .box {
-    width: 30%;
-    position: relative;
-    outline-style:none;
-    -webkit-tap-highlight-color:transparent;
-    &:hover{
-        cursor: pointer;
-    }
+	width: 30%;
+	position: relative;
+	outline-style: none;
+	-webkit-tap-highlight-color: transparent;
+	&:hover {
+		cursor: pointer;
+	}
 }
 
 .box:after {
-    content: "";
-    display: block;
-    padding-bottom: 100%;
+	content: "";
+	display: block;
+	padding-bottom: 100%;
 }
 
 .charContainer {
-    position: absolute;
-    height: 90%;
-    width: 100%;
-    bottom: 10%;
-    border-radius: 50%;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-    overflow-y: hidden;
-    z-index: 3;
+	position: absolute;
+	height: 90%;
+	width: 100%;
+	bottom: 10%;
+	border-radius: 50%;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+	overflow-y: hidden;
+	z-index: 3;
 }
 
 .character {
-    position: absolute;
-    left: 10%;
-    bottom: 0%;
-    height: 0px;
-    width: 80%;
-    z-index: 4;
-    background-repeat:no-repeat;
-    background-size: cover;
-    background-position: top; 
+	position: absolute;
+	left: 5%;
+	bottom: 0%;
+	height: 0px;
+	width: 90%;
+	z-index: 4;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: top;
 }
 
-@keyframes slideUp{
-    0% {
-        height: 0px;
-    }
-    30% {
-        height: 100%;
-    }
-    70% {
-        height: 100%;
-    }
-    100% {
-        height: 0px;
-    }
+@keyframes slideUp {
+	0% {
+		height: 0px;
+	}
+	30% {
+		height: 100%;
+	}
+	70% {
+		height: 100%;
+	}
+	100% {
+		height: 0px;
+	}
 }
 
 .char0 {
-    background-image: url(../assets/images/1.png);
-    animation-name: slideUp;
-    animation-timing-function: ease;
-    animation-duration: 1s;
+	background-image: url(../assets/images/1.png);
+	animation-name: slideUp;
+	animation-timing-function: ease;
+	animation-duration: 1s;
 }
-.char1{
-    background-image: url(../assets/images/2.png);
-    animation-name: slideUp;
-    animation-timing-function: ease;
-    animation-duration: 1s;
+.char1 {
+	background-image: url(../assets/images/2.png);
+	animation-name: slideUp;
+	animation-timing-function: ease;
+	animation-duration: 1s;
 }
 .char2 {
-    background-image: url(../assets/images/3.png);
-    animation-name: slideUp;
-    animation-timing-function: ease;
-    animation-duration: 1s;
+	background-image: url(../assets/images/3.png);
+	animation-name: slideUp;
+	animation-timing-function: ease;
+	animation-duration: 1s;
 }
 .char3 {
-    background-image: url(../assets/images/4.png);
-    animation-name: slideUp;
-    animation-timing-function: ease;
-    animation-duration: 1s;
+	background-image: url(../assets/images/4.png);
+	animation-name: slideUp;
+	animation-timing-function: ease;
+	animation-duration: 1s;
 }
 .char4 {
-    background-image: url(../assets/images/5.png);
-    animation-name: slideUp;
-    animation-timing-function: ease;
-    animation-duration: 1s;
+	background-image: url(../assets/images/5.png);
+	animation-name: slideUp;
+	animation-timing-function: ease;
+	animation-duration: 1s;
 }
 .char5 {
-    background-image: url(../assets/images/6.png);
-    animation-name: slideUp;
-    animation-timing-function: ease;
-    animation-duration: 1s;
+	background-image: url(../assets/images/6.png);
+	animation-name: slideUp;
+	animation-timing-function: ease;
+	animation-duration: 1s;
 }
 .char6 {
-    background-image: url(../assets/images/7.png);
-    animation-name: slideUp;
-    animation-timing-function: ease;
-    animation-duration: 1s;
+	background-image: url(../assets/images/7.png);
+	animation-name: slideUp;
+	animation-timing-function: ease;
+	animation-duration: 1s;
 }
 .char7 {
-    background-image: url(../assets/images/8.png);
-    animation-name: slideUp;
-    animation-timing-function: ease;
-    animation-duration: 1s;
+	background-image: url(../assets/images/8.png);
+	animation-name: slideUp;
+	animation-timing-function: ease;
+	animation-duration: 1s;
 }
 
 .hole {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    height: 50%;
-    width: 100%;
-    background-image: url(../assets/images/hole.png);
-    background-repeat:no-repeat;
-    background-size: contain;
-    background-position: center;    
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	height: 50%;
+	width: 100%;
+	background-image: url(../assets/images/hole.png);
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
 }
 
 .timer {
-    padding: 30px 10px 0 0;
-    color: white;
-    font-weight: bold;
-    z-index: 3;
-    font-size: 30px;
-    text-shadow: 0 2px 1px rgba(0, 0, 0, 0.7);
+	padding: 30px 10px 0 0;
+	color: white;
+	font-weight: bold;
+	z-index: 3;
+	font-size: 30px;
+	text-shadow: 0 2px 1px rgba(0, 0, 0, 0.7);
 }
 
 .row {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    height: 30%;
-    margin: auto;
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	height: 30%;
+	margin: auto;
 }
 
-.playGround{
-    position: relative;
-    margin: auto;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    justify-content: space-between;
-    align-content: center;
+.playGround {
+	position: relative;
+	margin: auto;
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+	justify-content: space-between;
+	align-content: center;
 }
 
 .playGround:after {
-    content: "";
-    display: block;
+	content: "";
+	display: block;
 }
-@media screen and (orientation:landscape) {
-    .playGround{
-        height: 90vh;
-        width: 90vh;
-        max-height: 600px;
-        max-width: 600px;
-    }
+@media screen and (orientation: landscape) {
+	.playGround {
+		height: 90vh;
+		width: 90vh;
+		max-height: 600px;
+		max-width: 600px;
+	}
 }
-@media screen and (orientation:portrait) {
-    .playGround{
-        width: 90vw;
-        height: 90vw;
-        max-height: 600px;
-        max-width: 600px;
-    }
+@media screen and (orientation: portrait) {
+	.playGround {
+		width: 90vw;
+		height: 90vw;
+		max-height: 600px;
+		max-width: 600px;
+	}
 }
-
