@@ -17,7 +17,7 @@ const PlayGround = ({ onItemClick, forceStop, charPoints, refs, charStates }: Pr
 
 	useEffect(() => {
 		if (forceStop) return;
-		const gClock = setInterval(() => refs[randomInt(0, 8)].current.activate(), 500) as any;
+		const gClock = setInterval(() => refs[randomInt(0, 8)].current.activate(), 400) as any;
 		return () => clearInterval(gClock);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
