@@ -1,52 +1,42 @@
-import React, { useEffect } from 'react'
-import './style.scss'
-import classNames from 'classnames';
+import React, { forwardRef, useImperativeHandle, useState } from "react";
+import "./style.scss";
+import classNames from "classnames";
+import { randomInt, audioObject } from "../utils";
 
 type CharProps = {
-    onItemClick:Function,
-    forceStop: boolean,
-    activeClass: string,
-    audioObject: any,
-    id: number
-}
-const Character = ({id, onItemClick, activeClass, forceStop, audioObject }: CharProps)=>{
+	onItemClick: Function;
+	initialClass: string;
+	charPoints: any;
+};
 
-    useEffect(() => {
+const Character = forwardRef(({ onItemClick, charPoints, initialClass = "" }: CharProps, forwardedRef: any) => {
+	const [charClass, setCalss] = useState({ activeClass: initialClass, lastTime: 0 });
+	useImperativeHandle(forwardedRef, () => ({
+		activate: () => {
+			if (charClass.activeClass !== "" && Date.now() - charClass.lastTime <= 1000) return;
 
-        if(forceStop) return
+			const nomination = Math.random() >= 0.5 ? 7 : randomInt(0, 6);
+			setCalss({ activeClass: `char${nomination}`, lastTime: Date.now() });
+		},
+	}));
 
-        let poofTimer;
+	return (
+		<div className="box">
+			<div className="charContainer">
+				<div
+					key={`${charClass.activeClass}${charClass.lastTime}`}
+					className={classNames("character", { [charClass.activeClass]: true })}
+					onClick={(ev) => {
+						ev.stopPropagation();
+						onItemClick(charPoints[charClass.activeClass]);
+						setCalss({ activeClass: "", lastTime: Date.now() });
+						audioObject.playSound("SPAWN", 200);
+					}}
+				/>
+			</div>
+			<div className="hole" />
+		</div>
+	);
+});
 
-        if(activeClass !== ''){
-
-            poofTimer = setTimeout(function(){
-                onItemClick(id);
-                clearTimeout(poofTimer);
-            },1000)
-
-        }
-
-        return () => clearTimeout(poofTimer);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [forceStop, activeClass]);
-
-    return <div className='box'>
-            <div className="charContainer">
-                <div 
-                    className={classNames('character', {[activeClass]: true})} 
-                    onClick={(ev) => {
-
-                        ev.stopPropagation();
-                        audioObject.playPoofAudio();
-                        onItemClick(id,activeClass);
-                        
-                    }}
-                />
-            </div>
-            <div className="hole"/>
-        </div>
-}
-
-const propsAreSameIf = (pre:CharProps,cur:CharProps) => pre.forceStop === cur.forceStop && pre.activeClass === cur.activeClass
-
-export default React.memo(Character,propsAreSameIf)
+export default Character;
