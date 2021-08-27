@@ -1,7 +1,7 @@
 import React, { forwardRef, useImperativeHandle, useState } from "react";
 import "./style.scss";
 import classNames from "classnames";
-import { randomInt } from "../utils";
+import { randomInt, audioObject } from "../utils";
 
 type CharProps = {
 	onItemClick: Function;
@@ -27,11 +27,10 @@ const Character = forwardRef(({ onItemClick, charPoints, initialClass = "" }: Ch
 					key={`${charClass.activeClass}${charClass.lastTime}`}
 					className={classNames("character", { [charClass.activeClass]: true })}
 					onClick={(ev) => {
-						//@ts-ignore
-						global.createjs.Sound.play("POOF");
 						ev.stopPropagation();
-						setCalss({ activeClass: "", lastTime: Date.now() });
 						onItemClick(charPoints[charClass.activeClass]);
+						setCalss({ activeClass: "", lastTime: Date.now() });
+						audioObject.playPoof();
 					}}
 				/>
 			</div>
