@@ -8,15 +8,20 @@ class AudioClass {
 		//@ts-ignore
 		this.createjs = window.createjs;
 		this.loadFiles = this.loadFiles.bind(this);
-		this.playPoof = this.playPoof.bind(this);
-		this.playDone = this.playDone.bind(this);
+		this.playSound = this.playSound.bind(this);
 	}
 
 	async loadFiles() {
+		if (!this.createjs.Sound.initializeDefaultPlugins()) {
+			return;
+		}
+
 		const poof = await (await import("../assets/audio/poof.mp3")).default;
+		const spawn = await (await import("../assets/audio/Game-Spawn.ogg")).default;
 		const done = await (await import("../assets/audio/done.wav")).default;
 
 		this.createjs.Sound.registerSound(poof, "POOF", 3);
+		this.createjs.Sound.registerSound(spawn, "SPAWN", 3);
 		this.createjs.Sound.registerSound(done, "DONE");
 
 		var resumeAudioContext = () => {
@@ -36,12 +41,8 @@ class AudioClass {
 		window.addEventListener("click", resumeAudioContext);
 	}
 
-	playPoof() {
-		this.createjs.Sound.play("POOF", { interrupt: this.createjs.Sound.INTERRUPT_ANY, startTime: 0, duration: 300 });
-	}
-
-	playDone() {
-		this.createjs.Sound.play("DONE", { interrupt: this.createjs.Sound.INTERRUPT_ANY, startTime: 0, duration: 1000 });
+	playSound(target, duration) {
+		this.createjs.Sound.play(target, { interrupt: this.createjs.Sound.INTERRUPT_ANY, startTime: 0, duration: duration });
 	}
 }
 

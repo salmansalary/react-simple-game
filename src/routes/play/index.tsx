@@ -28,7 +28,7 @@ function Play({ initialGameTime = 30, ...props }: PlayProps) {
 		setStop(true);
 
 		history.push("/home");
-		audioObject.playDone();
+		audioObject.playSound("DONE", 1000);
 
 		dispatch({
 			type: "ADD_SCORE",

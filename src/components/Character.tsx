@@ -30,7 +30,7 @@ const Character = forwardRef(({ onItemClick, charPoints, initialClass = "" }: Ch
 						ev.stopPropagation();
 						onItemClick(charPoints[charClass.activeClass]);
 						setCalss({ activeClass: "", lastTime: Date.now() });
-						audioObject.playPoof();
+						audioObject.playSound("SPAWN", 200);
 					}}
 				/>
 			</div>
