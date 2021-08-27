@@ -1,7 +1,7 @@
-import React, { useEffect, useCallback, useMemo, useRef } from "react";
+import React, { useEffect, useCallback, useRef } from "react";
 import Character from "./Character";
 import "./style.scss";
-import { randomInt, GameAudio } from "../utils";
+import { randomInt } from "../utils";
 
 type Props = {
 	onItemClick: Function;
@@ -13,8 +13,6 @@ type Props = {
 };
 
 const PlayGround = ({ onItemClick, forceStop, charPoints, refs, charStates }: Props) => {
-	const audioObject = useMemo(() => new GameAudio(), []);
-
 	useEffect(() => {
 		if (forceStop) return;
 		const gClock = setInterval(() => refs[randomInt(0, 8)].current.activate(), 400) as any;
@@ -27,7 +25,6 @@ const PlayGround = ({ onItemClick, forceStop, charPoints, refs, charStates }: Pr
 			({
 				charPoints,
 				onItemClick,
-				audioObject,
 				ref: refs[id],
 				initialClass: charStates[id],
 			} as any),

@@ -5,12 +5,11 @@ import { randomInt } from "../utils";
 
 type CharProps = {
 	onItemClick: Function;
-	audioObject: any;
 	initialClass: string;
 	charPoints: any;
 };
 
-const Character = forwardRef(({ onItemClick, audioObject, charPoints, initialClass = "" }: CharProps, forwardedRef: any) => {
+const Character = forwardRef(({ onItemClick, charPoints, initialClass = "" }: CharProps, forwardedRef: any) => {
 	const [charClass, setCalss] = useState({ activeClass: initialClass, lastTime: 0 });
 	useImperativeHandle(forwardedRef, () => ({
 		activate: () => {
@@ -28,7 +27,8 @@ const Character = forwardRef(({ onItemClick, audioObject, charPoints, initialCla
 					key={`${charClass.activeClass}${charClass.lastTime}`}
 					className={classNames("character", { [charClass.activeClass]: true })}
 					onClick={(ev) => {
-						audioObject.playPoofAudio();
+						//@ts-ignore
+						global.createjs.Sound.play("POOF");
 						ev.stopPropagation();
 						setCalss({ activeClass: "", lastTime: Date.now() });
 						onItemClick(charPoints[charClass.activeClass]);
