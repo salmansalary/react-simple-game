@@ -5,22 +5,19 @@ import { randomInt } from "../utils";
 
 type CharProps = {
 	onItemClick: Function;
-	forceStop: boolean;
 	audioObject: any;
 	initialClass: string;
 	charPoints: any;
 };
 
-const Character = forwardRef(({ onItemClick, forceStop, audioObject, charPoints, initialClass = "" }: CharProps, forwardedRef: any) => {
-	const [charClass, setCalss] = useState({ activeClass: initialClass, key: Math.random(), lastTime: 0 });
+const Character = forwardRef(({ onItemClick, audioObject, charPoints, initialClass = "" }: CharProps, forwardedRef: any) => {
+	const [charClass, setCalss] = useState({ activeClass: initialClass, lastTime: 0 });
 	useImperativeHandle(forwardedRef, () => ({
 		activate: () => {
-			if (forceStop) return;
-
 			if (charClass.activeClass !== "" && Date.now() - charClass.lastTime <= 1000) return;
 
 			const nomination = Math.random() >= 0.5 ? 7 : randomInt(0, 6);
-			setCalss({ activeClass: `char${nomination}`, key: Math.random(), lastTime: Date.now() });
+			setCalss({ activeClass: `char${nomination}`, lastTime: Date.now() });
 		},
 	}));
 
@@ -28,12 +25,12 @@ const Character = forwardRef(({ onItemClick, forceStop, audioObject, charPoints,
 		<div className="box">
 			<div className="charContainer">
 				<div
-					key={charClass.key}
+					key={`${charClass.activeClass}${charClass.lastTime}`}
 					className={classNames("character", { [charClass.activeClass]: true })}
 					onClick={(ev) => {
 						audioObject.playPoofAudio();
 						ev.stopPropagation();
-						setCalss({ activeClass: "", key: Math.random(), lastTime: 0 });
+						setCalss({ activeClass: "", lastTime: Date.now() });
 						onItemClick(charPoints[charClass.activeClass]);
 					}}
 				/>
@@ -43,6 +40,4 @@ const Character = forwardRef(({ onItemClick, forceStop, audioObject, charPoints,
 	);
 });
 
-const propsAreSameIf = (pre: CharProps, cur: CharProps) => pre.forceStop === cur.forceStop;
-
-export default React.memo(Character, propsAreSameIf);
+export default Character;
