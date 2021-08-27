@@ -16,11 +16,9 @@ class AudioClass {
 			return;
 		}
 
-		const poof = await (await import("../assets/audio/poof.mp3")).default;
-		const spawn = await (await import("../assets/audio/Game-Spawn.ogg")).default;
+		const spawn = await (await import("../assets/audio/piew.mp3")).default;
 		const done = await (await import("../assets/audio/done.wav")).default;
 
-		this.createjs.Sound.registerSound(poof, "POOF", 3);
 		this.createjs.Sound.registerSound(spawn, "SPAWN", 3);
 		this.createjs.Sound.registerSound(done, "DONE");
 
